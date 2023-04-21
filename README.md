@@ -16,3 +16,6 @@ In a standard scrolling shader, the textures UV's are displaced over time by the
 For this shader, I modified the code in the displacement shader's frag function to have the UV's be affected by the ScrollX and ScrollY variables I added.
 
 ![image](https://user-images.githubusercontent.com/92412422/233707045-fa686732-fd28-4255-a697-532b995038e7.png)
+
+Here is a flowchart explaining how this shader works:
+![FlowChart](https://user-images.githubusercontent.com/92412422/233709084-bd505618-f8c7-4ae6-b8b9-bd1499469b66.png)
