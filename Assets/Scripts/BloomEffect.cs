@@ -32,6 +32,18 @@ public class BloomEffect : MonoBehaviour {
 	[NonSerialized]
 	Material bloom;
 
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			toggle = !toggle;
+		}
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+			Application.Quit();
+        }
+    }
+
 	void OnRenderImage (RenderTexture source, RenderTexture destination) {
 		if (toggle == true)
 		{
