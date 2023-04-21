@@ -8,9 +8,12 @@ Shader "Custom/MyDisplacement"
         _Metallic("Metallic", Range(0,1)) = 0.0
         _WaveStrength("Wave Strength", Range(0, 1)) = 0.5
         _WaveSpeed("Wave Speed", float) = 1.0
+        _ScrollX("Scroll X", Range(-20, 5)) = 1
+        _ScrollY("Scroll Y", Range(-20, 5)) = 1
     }
         SubShader
         {
+
             Pass
             {
 
@@ -48,6 +51,8 @@ Shader "Custom/MyDisplacement"
             sampler2D _MainTex;
             float4 _MainTex_ST;
             sampler2D _DisplacementMap;
+            float _ScrollX;
+            float _ScrollY;
 
             // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
             // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -76,7 +81,9 @@ Shader "Custom/MyDisplacement"
             }
 
             fixed4 frag(v2f i) : SV_Target{
-                fixed4 col = tex2D(_MainTex, i.uv);
+                _ScrollX *= _Time;
+                _ScrollY *= _Time;
+                fixed4 col = tex2D(_MainTex, i.uv + float2(_ScrollX, _ScrollY));
                 UNITY_APPLY_FOG(i.fogCoord, col)
                 return col;
             }
