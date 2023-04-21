@@ -8,7 +8,6 @@ public class BloomEffect : MonoBehaviour {
 	const int BoxDownPass = 1;
 	const int BoxUpPass = 2;
 	const int ApplyBloomPass = 3;
-	const int DebugBloomPass = 4;
 
 	public Shader bloomShader;
 
@@ -24,7 +23,6 @@ public class BloomEffect : MonoBehaviour {
 	[Range(0, 1)]
 	public float softThreshold = 0.5f;
 
-	public bool debug;
 	public bool toggle = true;
 
 	RenderTexture[] textures = new RenderTexture[16];
@@ -40,7 +38,7 @@ public class BloomEffect : MonoBehaviour {
 		}
         if (Input.GetKeyDown(KeyCode.X))
         {
-			Application.Quit();
+            Application.Quit();
         }
     }
 
@@ -95,15 +93,8 @@ public class BloomEffect : MonoBehaviour {
 				currentSource = currentDestination;
 			}
 
-			if (debug)
-			{
-				Graphics.Blit(currentSource, destination, bloom, DebugBloomPass);
-			}
-			else
-			{
-				bloom.SetTexture("_SourceTex", source);
-				Graphics.Blit(currentSource, destination, bloom, ApplyBloomPass);
-			}
+			bloom.SetTexture("_SourceTex", source);
+			Graphics.Blit(currentSource, destination, bloom, ApplyBloomPass);
 			RenderTexture.ReleaseTemporary(currentSource);
 			
 		}
